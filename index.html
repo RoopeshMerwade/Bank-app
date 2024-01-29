@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="shortcut icon" type="image/png" href="/icon.png" />
+  <link href="https://fonts.googleapis.com/css?family=Poppins:400,500,600&display=swap" rel="stylesheet" />
+</head>
+
+<body>
+  <header>
+    <nav>
+      <p class="Day">Log in to get started</p>
+      <img src="./logo.png" class="image-logo" alt="Logo">
+      <form class="login">
+        <input type="text" placeholder="user" class="login-input login-username">
+        <input type="text" placeholder="PIN" maxlength="4" class="login-input login-pin">
+        <button class="login__btn login-button">&rarr;</button>
+      </form>
+    </nav>
+  </header>
+
+  <main class="app">
+    <section>
+      <div class="balance ">
+        <div>
+          <h2 class="balance_label">Current balance</h2>
+          <p class="Date">As of <span class="date"> 28/01/2000</span> , <span class="balancetime">time</span></p>
+        </div>
+        <h1 class="balance_amount "><span class="balaneRemaining">10,000,0</span>
+          ₹ </h1>
+      </div>
+    </section>
+
+    <section>
+      <div class="container">
+        <div class="transaction-details first " id="transaction-details">
+          <div class="transactions Each-transaction">
+            <p class="color-box">DEPOSIT</p>
+            <span class="transaction-date">28/01/2000</span>
+            <span class="transaction-details-amount">1000 ₹</span>
+          </div>
+          <hr>
+        </div>
+
+
+        <div class="send-money">
+          <h3 class="center">Transfer Money</h3>
+          <div class="send-money-container">
+
+            <div class="transfer-to ">
+              <input type="text" class="inputs" id="input1">
+              <label for="input1">Transfer To</label>
+            </div>
+
+            <div class="amount">
+              <input type="number" class="inputs" id="input2">
+              <label for="input2">Amount</label>
+            </div>
+
+            <div class="button-all">
+              <button id="button " class="send-transfer transferbtn">&rarr;</button>
+            </div>
+
+          </div>
+
+        </div>
+
+        <!-- loans -->
+        <div class="loan loans">
+          <h3 class="center">Request Loan</h3>
+          <div class="loan-container">
+
+            <div class="amount">
+              <input type="number" class="inputs loanamount">
+              <label for="inputs"> Amount</label>
+            </div>
+
+            <div class="button-all">
+              <button id="button" class="loan-btn loanbtn">&rarr;</button>
+            </div>
+
+          </div>
+        </div>
+
+
+        <div class="close-acc ">
+          <h3 class="center">Close Account</h3>
+          <div class="close-acc-container">
+
+            <div class="close-user">
+              <input class="inputs close-user" type="text">
+              <label for="">Confirm User</label>
+            </div>
+
+            <div class="close-pin">
+              <input class="inputs closepin" type="password">
+              <label for="">Confirm PIN</label>
+            </div>
+
+            <button id="button" class="close-btn">&rarr;</button>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="bottom">
+        <span class="in-value">IN <span class="bottom-font-size AmountIn"> 0 </span>₹</span>
+        <span class="out-value">OUT <span class="bottom-font-size AmountOut"> 0 </span>₹</span>
+        <span class="interest-value">INTEREST <span class="bottom-font-size Interest"> 0</span>₹</span>
+        <button class="sort"> <span class="bottom-font-size">&#x2191; </span>SORT
+        </button>
+      </div>
+      </div>
+
+  </main>
+  </section>
+  <script src="script.js"></script>
+</body>
+
+</html>
