@@ -238,6 +238,14 @@ input::-webkit-inner-spin-button {
   flex-direction: column;
   display: flex;
 }
+.AmountIn,
+.Interest {
+  color: rgb(8, 170, 8);
+}
+.AmountOut {
+  color: rgb(214, 8, 8);
+}
+
 .loan-btn {
   font-size: 1.5rem;
   outline: 0;
