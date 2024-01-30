@@ -178,8 +178,6 @@ const AccDeposits = function (accsDepo) {
     });
   });
 };
-// AccDeposits(accounts);
-// console.log(accounts);
 
 const deposits = account1.movements.filter((mov) => {
   return mov > 0;
@@ -235,7 +233,7 @@ loginbtn.addEventListener("click", function (e) {
   currentaccount = accounts.find((acct) => acct.username === loginuser.value);
 
   if (currentaccount) {
-    if (currentaccount.pin === Number(loginpin.value)) {
+    if (currentaccount.pin === +loginpin.value) {
       namewish.textContent = `Good Afternoon ${
         currentaccount.owner.split(" ")[0]
       }`;
@@ -254,7 +252,7 @@ loginbtn.addEventListener("click", function (e) {
 });
 
 transferbtn.addEventListener("click", function () {
-  const amount = Number(amounttotransfer.value);
+  const amount = +amounttotransfer.value;
   const receiveracc = accounts.find((acc) => acc.username === transferto.value);
 
   if (
@@ -293,7 +291,7 @@ closeacctbtn.addEventListener("click", function (event) {
   event.preventDefault();
   if (
     closeuseracct.value === currentaccount.username &&
-    currentaccount.pin === Number(closepin.value)
+    currentaccount.pin === +closepin.value
   ) {
     const index = accounts.findIndex(
       (acc) => acc.username === currentaccount.username
