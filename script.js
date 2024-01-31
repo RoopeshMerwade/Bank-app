@@ -84,7 +84,7 @@ const account4 = {
 const accounts = [account1, account2, account3, account4];
 
 // DOM selectors
-let currentTime = getCurrentTime();
+let currentTime = getCurrentTime12Hour();
 const timebal = (document.querySelector(".balancetime").textContent =
   currentTime);
 const Navbtn = document.querySelector(".login__btn");
@@ -163,7 +163,6 @@ const displayMovements = function (movements, sort = false) {
 
     const dateSpan = document.createElement("span");
     dateSpan.classList.add("transaction-date");
-    dateSpan.textContent = getCurrentDate();
 
     const amountSpan = document.createElement("span");
     amountSpan.classList.add("transaction-details-amount");
@@ -200,12 +199,17 @@ function getCurrentDate() {
   return `${day}/${month}/${year}`;
 }
 
-function getCurrentTime() {
+function getCurrentTime12Hour() {
   const now = new Date();
-  const hours = now.getHours().toString().padStart(2, "0");
+  let hours = now.getHours();
+  const amPm = hours >= 12 ? "PM" : "AM";
+
+  hours = hours % 12 || 12;
+
   const minutes = now.getMinutes().toString().padStart(2, "0");
   const seconds = now.getSeconds().toString().padStart(2, "0");
-  return `${hours}:${minutes}:${seconds}`;
+
+  return `${hours}:${minutes}:${seconds} ${amPm}`;
 }
 
 const createUserNames = function () {
@@ -275,7 +279,30 @@ const AmountIn = function (account) {
 
 const AllAccounts = accounts.find((int) => int.interestRate < 1.2);
 
-let currentaccount;
+const createLogoutTimer = function () {
+  const timer = document.querySelector(".LogoutTime");
+
+  const tick = function () {
+    let minutes = Math.floor(timeDuration / 60);
+    let seconds = timeDuration % 60;
+    let formattedtime = `${minutes}:${seconds.toString().padStart(2, "0")}`;
+    timer.textContent = formattedtime;
+
+    if (timeDuration === 0) {
+      clearInterval(timeDuration);
+      app.style.opacity = 0;
+      namewish.textContent = "Log in to get Started";
+    }
+    timeDuration--;
+  };
+  let timeDuration = 10 * 60;
+
+  tick();
+  const time = setInterval(tick, 1000);
+  return time;
+};
+
+let currentaccount, time;
 
 loginbtn.addEventListener("click", function (e) {
   e.preventDefault();
@@ -292,6 +319,8 @@ loginbtn.addEventListener("click", function (e) {
       total(currentaccount.movements);
       displayMovements(currentaccount.movements);
       AmountIn(currentaccount);
+      if (time) clearInterval(time);
+      time = createLogoutTimer();
     } else {
       console.error("Incorrect pin.");
     }
@@ -324,6 +353,8 @@ transferbtn.addEventListener("click", function () {
       displayMovements(currentaccount.movements);
 
       amounttotransfer.value = transferto.value = "";
+      clearInterval(time);
+      time = createLogoutTimer();
     } else {
       console.error("Insufficient balance for the transfer.");
     }
@@ -370,6 +401,8 @@ loanbutton.addEventListener("click", function (e) {
     displayMovements(currentaccount.movements);
   }
   loan.value = "";
+  clearInterval(time);
+  time = createLogoutTimer();
 });
 
 let sorted = false;
@@ -384,12 +417,12 @@ function TransactionDates(account) {
   const formattedDates = account.movementsDates.map((datestring) => {
     const originalDate = new Date(datestring);
     const day = String(originalDate.getUTCDate()).padStart(2, "0");
-    const month = String(originalDate.getUTCMonth() + 1).padStart(2, 0);
-    const year = originalDate.getUTCFullYear();
+    const month = String(originalDate.getUTCMonth() + 1).padStart(2, "0");
+    const year = String(originalDate.getUTCFullYear());
 
     return `${day}/${month}/${year}`;
   });
   return formattedDates;
 }
 // Rough
-console.log(TransactionDates(account1.movementsDates));
+// console.log(TransactionDates(account1));
