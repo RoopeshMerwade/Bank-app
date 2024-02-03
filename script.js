@@ -101,7 +101,7 @@ const transactiondate = document.querySelector(".transaction-date");
 
 // close-account
 const closeacctbtn = document.querySelector(".close-btn");
-const closeuseracct = document.querySelector(".close-user");
+const closeuseracct = document.querySelector(".inputs.close-user");
 const closepin = document.querySelector(".closepin");
 
 // Login
