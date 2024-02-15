@@ -221,7 +221,7 @@ const createUserNames = function () {
       .join("");
   });
 };
-createUserNames(accounts);
+createUserNames();
 // console.log(accounts);
 
 const AccDeposits = function (accsDepo) {
