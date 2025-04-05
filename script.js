@@ -304,12 +304,27 @@ const createLogoutTimer = function () {
 
 let currentaccount, time;
 
+// Add these DOM selectors at the top with other selectors
+const errorMessage = document.createElement("div");
+errorMessage.style.cssText =
+  "color: var(--color-error); text-align: center; margin-top: 10px;";
+document.querySelector(".login").appendChild(errorMessage);
+
+// Modify the login event listener
 loginbtn.addEventListener("click", function (e) {
   e.preventDefault();
+  errorMessage.textContent = ""; // Clear previous error messages
+
+  if (!loginuser.value || !loginpin.value) {
+    errorMessage.textContent = "Please enter both username and PIN";
+    return;
+  }
+
   currentaccount = accounts.find((acct) => acct.username === loginuser.value);
 
   if (currentaccount) {
     if (currentaccount.pin === +loginpin.value) {
+      // Success - existing login code
       namewish.textContent = `Good Afternoon ${
         currentaccount.owner.split(" ")[0]
       }`;
@@ -322,10 +337,15 @@ loginbtn.addEventListener("click", function (e) {
       if (time) clearInterval(time);
       time = createLogoutTimer();
     } else {
-      console.error("Incorrect pin.");
+      errorMessage.textContent = "Incorrect PIN";
+      loginpin.value = "";
+      loginpin.focus();
     }
   } else {
-    console.error("Username not found.");
+    errorMessage.textContent = "Username not found";
+    loginuser.value = "";
+    loginpin.value = "";
+    loginuser.focus();
   }
 });
 
